@@ -1,0 +1,35 @@
+
+.chatWindow {
+    height: 50vh;
+    border: 1px solid black;
+}
+
+.chatMessages {
+    border: 1px solid black;
+    height: 80%;
+}
+
+.textInput {
+    width: 100%;
+    height: 40px;
+}
+
+.chatInput {
+    display: flex;
+}
+
+.bot {
+    text-align: left;
+    background-color: white;
+    height: auto;
+}
+
+.user {
+    text-align: right;
+    background-color: greenyellow;
+}
+
+.listItem {
+    padding: 2px;
+    margin: 3px 0;
+}

@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+
+.chatArea {
+  border: 1px solid black;
+  margin: 5px 50px;
+  height: 30vh;
+  background-color: grey;
+}
+
+.reverseList {
+  display: flex;
+  flex-direction: column-reverse;
+  list-style: none;
+  margin: 0 auto;
+}
+
+p {
+  width: 75%;
+  margin: 0 auto;
+}
