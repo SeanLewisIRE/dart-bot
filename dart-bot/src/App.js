@@ -18,7 +18,7 @@ function App() {
     // axios.get(url, {headers})
     //   .then(response => console.log(response))
 
-    // Blocked by CORS so I've set up a dmmy array. Levaing it in fucntion to demonstate how I wanted it to work.
+    // Blocked by CORS so I've set up a dummy array. Levaing it in fucntion to demonstate how I wanted it to work.
 
     const stations = [
       { "station": "malahide" },
@@ -56,31 +56,37 @@ function App() {
       }
     ]
 
-    // This is assuming the API returns in order as it does
+    // This is assuming the API returns in order as it does on Irish rail.
     const next2Trains = nextTrains.slice(0, 2)
+    // Returs time of next 2 trains, could be modified to return destination etc also
     return next2Trains.map(train => train.objStationData.Exparrival).toString()
   }
 
+  // Make "call" to API to have list of stations available for use 
   const stationList = allStationsCall();
 
+  //Set state for messages (display) and input (form submission)
   const [messages, setMessages] = useState(openingMessage);
   const [inputValue, setInputValue] = useState("");
 
   const _handleSubmit = e => {
     e.preventDefault();
     if (inputValue === "") return alert("Message is required");
-
+    // Add user message to message state
     const newArr = messages.slice();
     newArr.splice(0, 0, { message: inputValue, poster: "user" });
     setMessages(newArr);
 
+    // Get ready for check of user input
     const inputArray = inputValue.split(" ").map(i => i.toLowerCase())
     const stationArray = stationList.map(station => station.station).toString()
-
     const searchString = inputValue.toLowerCase()
+
+    // Check for keyword stations, if present return list of stations from "API"
     if (searchString.includes("stations")) {
       newArr.splice(0, 0, { message: `I think you're looking for a list of stations! Here you go: ${stationArray.toString()}`, poster: "bot" });
       setMessages(newArr);
+      //Check array of stations against array of user input. If a station we have in our array is detected, I would make an API call using function with this stations code/name to return times. (This is why stations function is always called first, to have this prepped)
     } else if (inputArray.some(res => stationArray.indexOf(res) >= 0)) {
       newArr.splice(0, 0, { message: `The next two trains at ${searchString} are at ${stationTimeCall()}`, poster: "bot" });
       setMessages(newArr);
